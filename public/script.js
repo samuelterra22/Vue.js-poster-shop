@@ -19,7 +19,6 @@ new Vue({
     }
   },
   methods: {
-
     appendItems: function () {
       if (this.items.length < this.results.length) {
         var append = this.results.slice(this.items.length, this.items.length + LOAD_NUM)
@@ -27,16 +26,18 @@ new Vue({
       }
     },
     onSubmit: function () {
-      this.items = []
-      this.loading = true
-      this.$http
-        .get('/search/'.concat(this.newSearch))
-        .then(function (res) {
-          this.lastSearch = this.newSearch
-          this.results = res.data
-          this.appendItems()
-          this.loading = false
-        })
+      if (this.newSearch.length) {
+        this.items = []
+        this.loading = true
+        this.$http
+          .get('/search/'.concat(this.newSearch))
+          .then(function (res) {
+            this.lastSearch = this.newSearch
+            this.results = res.data
+            this.appendItems()
+            this.loading = false
+          })
+      }
     },
     addItem: function (index) {
       this.total += PRICE
