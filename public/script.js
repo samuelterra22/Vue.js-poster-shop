@@ -15,8 +15,6 @@ new Vue({
   },
   methods: {
     appendItems: function(){
-      console.log((this.items.length))
-      console.log((this.results.length))
       if (this.items.length < this.results.length) {
         var append = this.results.slice(this.items.length, this.items.length + LOAD_NUM)
         this.items = this.items.concat(append)
